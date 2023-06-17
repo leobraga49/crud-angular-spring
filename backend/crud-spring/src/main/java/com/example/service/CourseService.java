@@ -20,4 +20,8 @@ public class CourseService {
     public Course save(Course course) {
         return courseRepository.save(course);
     }
+
+    public Course findById(Long id) {
+        return courseRepository.findById(id).orElseThrow();
+    }
 }
