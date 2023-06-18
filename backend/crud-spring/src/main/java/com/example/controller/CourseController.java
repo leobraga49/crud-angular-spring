@@ -28,7 +28,7 @@ public class CourseController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Course> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(courseService.findById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(courseService.findById(id));
     }
 
     @PutMapping("/{id}")

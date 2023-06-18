@@ -22,7 +22,7 @@ public class CourseService {
     }
 
     public Course findById(Long id) {
-        return courseRepository.findById(id).orElseThrow();
+        return courseRepository.findById(id).orElseThrow(() -> new RuntimeException("Course not found with ID: " + id));
     }
 
     public Course update(Long id, Course course) {
