@@ -24,6 +24,10 @@ export class CoursesService {
     return this.httpClient.get<Course>(`${this.API}/${id}`).pipe(first());
   }
 
+  delete(id: string) {
+    return this.httpClient.delete(`${this.API}/${id}`).pipe(first());
+  }
+
   save(record: Course) {
     if (record._id) {
       return this.update(record);
@@ -38,6 +42,4 @@ export class CoursesService {
   private update(record: Course) {
     return this.httpClient.put<Course>(`${this.API}/${record._id}`, record).pipe(first());
   }
-
-
 }
