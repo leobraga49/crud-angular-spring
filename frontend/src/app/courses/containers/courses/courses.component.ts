@@ -8,6 +8,7 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 
 import { Course } from '../../model/course';
 import { CoursesService } from '../../services/courses.service';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 
 @Component({
@@ -54,11 +55,19 @@ export class CoursesComponent {
   }
 
   onDelete(course: Course) {
-    this.coursesService.delete(course._id).subscribe(
-      () => {
-        this.refresh();
-        this._snackBar.open("Course deleted", "X", { duration: 2000, verticalPosition: 'top', horizontalPosition: 'center' });
-      },
-      () => this.onError("Error deleting course"));
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: "Are you sure you want to delete this course?",
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.coursesService.delete(course._id).subscribe(
+          () => {
+            this.refresh();
+            this._snackBar.open("Course deleted", "X", { duration: 2000, verticalPosition: 'top', horizontalPosition: 'center' });
+          },
+          () => this.onError("Error deleting course"));
+      }
+    });
   }
 }
