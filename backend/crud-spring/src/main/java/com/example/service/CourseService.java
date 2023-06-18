@@ -31,4 +31,8 @@ public class CourseService {
         courseToUpdate.setCategory(course.getCategory());
         return courseRepository.save(courseToUpdate);
     }
+
+    public void delete(Long id) {
+        courseRepository.delete(findById(id));
+    }
 }
