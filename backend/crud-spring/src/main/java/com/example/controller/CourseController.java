@@ -30,4 +30,9 @@ public class CourseController {
     public ResponseEntity<Course> findById(@PathVariable Long id) {
         return ResponseEntity.ok(courseService.findById(id));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Course> update(@PathVariable Long id, @RequestBody Course course) {
+        return ResponseEntity.ok(courseService.update(id, course));
+    }
 }

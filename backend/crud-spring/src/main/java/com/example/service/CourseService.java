@@ -24,4 +24,11 @@ public class CourseService {
     public Course findById(Long id) {
         return courseRepository.findById(id).orElseThrow();
     }
+
+    public Course update(Long id, Course course) {
+        var courseToUpdate = findById(id);
+        courseToUpdate.setName(course.getName());
+        courseToUpdate.setCategory(course.getCategory());
+        return courseRepository.save(courseToUpdate);
+    }
 }
