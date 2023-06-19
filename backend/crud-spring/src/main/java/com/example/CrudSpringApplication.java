@@ -20,7 +20,7 @@ public class CrudSpringApplication {
             courseRepository.deleteAll();
             var c = new Course();
             c.setName("Angular with Spring Boot");
-            c.setCategory("FullStack");
+            c.setCategory("Front-end");
             courseRepository.save(c);
         };
     }

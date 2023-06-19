@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 
@@ -23,8 +23,8 @@ export class CourseFormComponent {
     private route: ActivatedRoute) {
     this.form = this.formBuilder.group({
       _id: [''],
-      name: [''],
-      category: [''],
+      name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      category: ['', [Validators.required]]
     });
 
     const course: Course = this.route.snapshot.data["course"];
@@ -43,6 +43,22 @@ export class CourseFormComponent {
 
   onCancel() {
     this.location.back();
+  }
+
+  getErrorMessage(fieldName: string) {
+    const field = this.form.get(fieldName);
+    if (field?.hasError('required')) {
+      return 'You must enter a valid value';
+    }
+
+    if (field?.hasError('minlength')) {
+      return 'The minimum length is 5 characters';
+    }
+
+    if (field?.hasError('maxlength')) {
+      return 'The maximum length is 100 characters';
+    }
+    return 'error';
   }
 
   private onSuccess() {
