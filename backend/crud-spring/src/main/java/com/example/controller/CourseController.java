@@ -27,23 +27,23 @@ public class CourseController {
     }
 
     @PostMapping
-    public ResponseEntity<Course> save(@RequestBody @Valid Course course) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(courseService.save(course));
+    public Course save(@RequestBody @Valid Course course) {
+        return courseService.save(course);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Course> findById(@PathVariable @NotNull @Positive Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(courseService.findById(id));
+    public Course findById(@PathVariable @NotNull @Positive Long id) {
+        return courseService.findById(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Course> update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Course course) {
-        return ResponseEntity.ok(courseService.update(id, course));
+    public Course update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Course course) {
+        return courseService.update(id, course);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable @NotNull @Positive Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable @NotNull @Positive Long id) {
         courseService.delete(id);
-        return ResponseEntity.noContent().build();
     }
 }
