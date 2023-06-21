@@ -1,13 +1,12 @@
 package com.example.controller;
 
-import com.example.model.Course;
+import com.example.dto.CourseDTO;
 import com.example.service.CourseService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,22 +21,22 @@ public class CourseController {
     private final CourseService courseService;
 
     @GetMapping
-    public List<Course> listAll() {
+    public List<CourseDTO> listAll() {
         return courseService.listAll();
     }
 
     @PostMapping
-    public Course save(@RequestBody @Valid Course course) {
+    public CourseDTO save(@RequestBody @Valid CourseDTO course) {
         return courseService.save(course);
     }
 
     @GetMapping("/{id}")
-    public Course findById(@PathVariable @NotNull @Positive Long id) {
+    public CourseDTO findById(@PathVariable @NotNull @Positive Long id) {
         return courseService.findById(id);
     }
 
     @PutMapping("/{id}")
-    public Course update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Course course) {
+    public CourseDTO update(@PathVariable @NotNull @Positive Long id, @RequestBody @NotNull @Valid CourseDTO course) {
         return courseService.update(id, course);
     }
 
