@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.enums.Category;
 import com.example.model.Course;
 import com.example.repository.CourseRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +21,7 @@ public class CrudSpringApplication {
             courseRepository.deleteAll();
             var c = new Course();
             c.setName("Angular with Spring Boot");
-            c.setCategory("Front-end");
+            c.setCategory(Category.FRONTEND);
             courseRepository.save(c);
         };
     }
