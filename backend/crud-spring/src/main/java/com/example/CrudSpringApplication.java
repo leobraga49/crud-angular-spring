@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.enums.Category;
 import com.example.model.Course;
+import com.example.model.Lesson;
 import com.example.repository.CourseRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +23,13 @@ public class CrudSpringApplication {
             var c = new Course();
             c.setName("Angular with Spring Boot");
             c.setCategory(Category.FRONTEND);
+
+            var l = new Lesson();
+            l.setName("Angular 10");
+            l.setUrl("watch?123");
+            l.setCourse(c);
+            c.getLessons().add(l);
+
             courseRepository.save(c);
         };
     }
