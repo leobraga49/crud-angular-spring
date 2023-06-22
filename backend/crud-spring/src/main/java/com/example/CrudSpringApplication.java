@@ -30,6 +30,12 @@ public class CrudSpringApplication {
             l.setCourse(c);
             c.getLessons().add(l);
 
+            var l1 = new Lesson();
+            l1.setName("Node.js");
+            l1.setUrl("watch?345");
+            l1.setCourse(c);
+            c.getLessons().add(l1);
+
             courseRepository.save(c);
         };
     }
